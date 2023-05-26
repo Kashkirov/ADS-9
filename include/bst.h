@@ -4,7 +4,7 @@
 #include <algorithm>
 template <typename T>
 class BST {
-private:
+ private:
     struct Node {
         T info;
         int sum;
@@ -18,13 +18,12 @@ private:
         }
         return 1 + std::max(gatherNodeAmount(localRoot->left), gatherNodeAmount(localRoot->right));
     }
-    void addNode(Node* localRoot, T& word) {
+    void addNode(Node* localRoot, const T& word) {
         if (word < localRoot->info) {
             if (localRoot->left) {
                 addNode(localRoot->left, word);
                 return;
-            }
-            else {
+            } else {
                 localRoot->left = new Node;
                 localRoot->left->info = word;
                 localRoot->left->sum = 1;
@@ -35,8 +34,7 @@ private:
             if (localRoot->right) {
                 addNode(localRoot->right, word);
                 return;
-            }
-            else {
+            } else {
                 localRoot->right = new Node;
                 localRoot->right->info = word;
                 localRoot->right->sum = 1;
@@ -52,23 +50,20 @@ private:
         }
         if (word < localRoot->info) {
             return Compare(localRoot->left, word);
-        }
-        else if (word == localRoot->info) {
+        } else if (word == localRoot->info) {
             return localRoot->sum;
-        }
-        else {
+        } else {
             return 0;
         }
     }
 
-public:
-    void addNode(T& word) {
+ public:
+    void addNode(const T& word) {
         if (m_root == nullptr) {
             m_root = new Node;
             m_root->info = word;
             m_root->sum = 1;
-        }
-        else {
+        } else {
             addNode(m_root, word);
         }
     }
